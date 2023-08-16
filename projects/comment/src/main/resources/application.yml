@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: local
+  #thymeleaf 설정
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/   # .html 파일 경로 (src/main/resources/templates)
+    suffix: .html   # 확장자
+    cache: false # default: true, 개발 시에는 false로 두는 것이 좋음
+  mvc:
+    static-path-pattern: /static/** # spring mvc 정적 파일들의 경로 (css, js파일 등)
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/spring_db
+    username: root
+    #password: password
+mybatis:
+  mapper-locations:
+    - classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true # (DB)value_name -> (Java)valueName 자동 매핑
+server:
+  servlet:
+    context-path: /
+  port: 8081
