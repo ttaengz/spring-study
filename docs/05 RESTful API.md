@@ -18,21 +18,31 @@
  - [HTTP의 상태 메서드는 이곳을 참고](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods)
 
 ### REST 구성 요소
- - 자원(Resource) : HTTP URI
- - 자원에 대한 행위(Verb) : HTTP Method
+ - 자원 (Resource) : HTTP URI
+ - 자원에 대한 행위 (Verb) : HTTP Method
  - 자원에 대한 행위의 내용 (Representations) : HTTP Message Payload
 
 ### REST의 특징
- - Server-Client(서버-클라이언트 구조)
- - Stateless(무상태)
- - Cacheable(캐시 처리 가능)
- - Layered System(계층화)
- - Uniform Interface(인터페이스 일관성)
+ - Server-Client (서버-클라이언트 구조)
+   - 자원이 있는 쪽이 Server, 자원을 요청하는 쪽이 Client가 된다. 
+ - Stateless (무상태)
+   - HTTP 프로토콜은 Stateless Protocol이므로 REST 역시 무상태성을 갖는다.
+   - Client의 context를 Server에 저장하지 않는다.
+   - Server는 각각의 요청을 완전히 별개의 것으로 인식하고 처리한다.
+ - Cacheable (캐시 처리 가능)
+   - 웹 표준 HTTP 프로토콜을 그대로 사용하므로 웹에서 사용하는 기존의 인프라를 그대로 활용할 수 있다.
+   - HTTP 프로토콜 표준에서 사용하는 캐싱 기능 활용 
+ - Layered System (계층화)
+   - Client - API Server : 심플하게 구성할 수 도 있고
+   - Client - Proxy - Gateway, LB, Auth - Server : 다중 계층으로 구성하여 보안성과 처리 능력을 향상시킬 수 있다.
+ - Uniform Interface (인터페이스 일관성)
+   - URI로 지정한 Resource에 대한 조작을 통일되고 한정적인 인터페이스로 수행한다.
+   - HTTP 표준 프로토콜에 따르는 모든 플랫폼에서 사용이 가능하므로 특정 언어나 기술에 종속되지 않는다.
 
 ## REST API란?
  - RESPT API는 REST의 원리를 따르는 API를 의미.
  - (엄밀히 말하면 아닌 경우도 있으나) 일반적으로 http를 활용한 웹 API를 흔히 그렇게 부른다.
-  > API(application programming interface)의 본래 용어적 의미는 어플리케이션(프로그램)간 연결을 위한 인터페이스를 말하지만 웹 API에서는 주로 서버-서버간 또는 서버-프론트간 통신을 위한 인터페이스를 API라고 하기도 한다. 
+  > API(application programming interface)의 본래 용어적 의미는 어플리케이션(프로그램)간 연결과 데이터 교환을 위한 인터페이스를 말하지만 <br>웹 API에서는 주로 서버-서버간 또는 서버-프론트간 통신을 위한 인터페이스를 API라고 하기도 한다. 
 
 ## REST API 설계 원칙
  REST API를 올바르게 설계하기 위해서는 지켜야 하는 몇가지 규칙이 있다.
@@ -62,7 +72,7 @@
 ## RESTful이란?
 RESTFul이란 REST의 원리를 따르는 시스템을 의미한다. 하지만 REST를 사용했다 하여 모두가 RESTful 한 것은 아니다.  REST API의 설계 규칙을 올바르게 지킨 시스템을 RESTful하다 말할 수 있지만 REST API의 설계 규칙을 올바르게 지키지 못한 시스템은 REST API를 사용하였지만 RESTful 하지 못한 시스템이라고 할 수 있다.
 
-예:
+예 (Not RESTful):
  - 모든 CRUD를 GET또는 POST로만 처리
  - URI에 동작을 표현: `/posts/create`
 
@@ -84,7 +94,8 @@ RESTFul이란 REST의 원리를 따르는 시스템을 의미한다. 하지만 R
 
 
 ## Spring에서의 REST API 구현
- - Model 설계
+ - Model(VO) 설계
+   - 주고 받는 데이터(자원)에 대한 내용을 Java객체에 맵핑할 수 있도록 설계한다.
    - 다음은 심플 댓글 모델의 예시
       ```java
       @Data
@@ -126,13 +137,13 @@ RESTFul이란 REST의 원리를 따르는 시스템을 의미한다. 하지만 R
    - Controller에서는 Http요청을 받아 여기서 구현된(Service클래스의) 메서드들을 호출하게 된다. 
 
 ### Controller에서 POST, PUT요청 처리하기
- - 다음과 같이 POST 요청을 받는 메서드를 만들고 Model객체를 파라미터로 받는다. 
+ - 다음과 같이 POST 요청을 받는 메서드를 만들고 Model객체(VO)를 파라미터로 받는다. 
  - 파라미터에 `@RequestBody`어노테이션을 붙이면 POST요청 body의 내용이 객체에 맵핑된다.
 
     ```java
     @PostMapping("/comments/test")
     @ResponseBody
-    public CommentModel getCommentModel(@RequestBody CommentModel commentModel) {
+    public CommentModel postCommentModel(@RequestBody CommentModel commentModel) {
 
         // XXXService.createXXX(commentModel); 와 같이 서비스 로직으로 넘겨 처리한다.
 
