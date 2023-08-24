@@ -48,7 +48,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'spring'@'%' identified BY 'spring-pw';
 flush privileges;
 ```
 
-# 권한 확인
+### 권한 확인
 ```sql
 SELECT host, user, password FROM mysql.user;
 ```
