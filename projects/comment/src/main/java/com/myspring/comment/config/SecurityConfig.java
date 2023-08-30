@@ -1,9 +1,9 @@
 package com.myspring.comment.config;
 
 import com.myspring.comment.service.UserSecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    UserSecurityService userSecurityService;
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -22,6 +25,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .csrf((csrf) -> csrf
                         .ignoringRequestMatchers(new AntPathRequestMatcher("/**")))
+                .userDetailsService(userSecurityService)
                 .formLogin((formLogin) -> formLogin /* 로그인 Url 설정 */
                         .loginPage("/users/login")
                         .usernameParameter("userId")
@@ -39,12 +43,5 @@ public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-
-    protected void configAuthenticationManager(AuthenticationManagerBuilder managerBuilder,
-                                               UserSecurityService userSecurityService,
-                                               PasswordEncoder passwordEncoder) throws Exception {
-        managerBuilder.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder);
     }
 }

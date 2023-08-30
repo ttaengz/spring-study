@@ -2,10 +2,10 @@
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Simple 댓글 서비스</a>
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarColor01" style="">
+        <div class="navbar-collapse collapse" id="navbar" style="">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">홈</a>
@@ -21,7 +21,7 @@
                 </li>
             </ul>
             <span sec:authorize="isAuthenticated()" class="navbar-text">
-                <span th:text="${userName}"></span>
+                <span th:if="${user}" th:text="${user.userName}"></span>
                 환영합니다.
             </span>
             <span sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-text">

@@ -1,7 +1,6 @@
 package com.myspring.comment.controller;
 
 import com.myspring.comment.model.CommentModel;
-import com.myspring.comment.model.UserModel;
 import com.myspring.comment.service.CommentService;
 import com.myspring.comment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CommentController {
@@ -30,10 +28,7 @@ public class CommentController {
         // 로그인 상태일 경우 유저 정보는 다음과 같이 구할 수 있다. (로그인 정보가 principal객체로 전달됨)
         // 매번 구하지 말고 좀 더 효율적으로 사용할 방법이 있을까?
         if (principal != null) {
-            model.addAttribute("userName",
-                    Optional.ofNullable(userService.getUser(principal.getName()))
-                            .map(UserModel::getUserName)
-                            .orElse(""));
+            model.addAttribute("user", userService.getUser(principal.getName()));
         }
 
         List<CommentModel> commentList = commentService.getAllCommentList();
