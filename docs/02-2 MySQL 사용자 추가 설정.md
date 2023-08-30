@@ -34,6 +34,11 @@ CREATE USER 'spring'@'localhost' IDENTIFIED BY 'spring-pw';
 flush privileges;
 ```
 
+> 오류 발생(XAMPP버그 추정) 시 cmd에서 다음 명령어로 테이블들을 복구한다.
+> ```bash
+>mysqlcheck -u root -p --auto-repair --check --all-databases
+>```
+
 
 ### user에 권한 부여
  - DB명.테이블명 형식
@@ -54,3 +59,10 @@ SELECT host, user, password FROM mysql.user;
 ```
 
 이후 MySQL서버를 재시작 하여 생성한 user로 접속
+
+### 유저 삭제하기
+```sql
+DROP USER 'spring';
+DROP USER 'spring'@'localhost';
+flush privileges;
+```

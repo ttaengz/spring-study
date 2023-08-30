@@ -176,7 +176,7 @@ RESTFul이란 REST의 원리를 따르는 시스템을 의미한다. 하지만 R
  - JavaScript Fetch API에 관한 내용은 [이 가이드를 참고](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch)
 
     ```JS
-    fetch("http://localhost:8081/comments/test", {
+    fetch("http://localhost:8080/comments/test", {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -199,7 +199,7 @@ RESTFul이란 REST의 원리를 따르는 시스템을 의미한다. 하지만 R
 ### 운영체제 커맨드 (curl)
  - 윈도우(cmd)와 리눅스(bash) 모두 curl이라는 http호출 도구를 지원한다. 이를 활용하여 REST API를 호출해볼 수 있다.
     ```bash
-    curl --location --request POST 'http://localhost:8081/comments/test' \
+    curl --location --request POST 'http://localhost:8080/comments/test' \
     --header 'Content-Type: application/json' \
     --data-raw '{
         "no": 1,

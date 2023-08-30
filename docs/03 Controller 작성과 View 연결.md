@@ -93,7 +93,7 @@ public class MainController {
           return "main";
       }
     ```
- - 어플리케이션 재시작(Shift+F10) 후 http://127.0.0.1:8081/ 접속해본다.
+ - 어플리케이션 재시작(Shift+F10) 후 http://127.0.0.1:8080/ 접속해본다.
  - 위에서 만들었던 html페이지가 열리는지 확인
 
     ![hello thymeleaf](./img/hello%20thymeleaf.png)
