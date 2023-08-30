@@ -8,3 +8,4 @@
 - [4.DataBase자료 조회하기 (Model 생성과 DB연결)](https://github.com/ttaengz/spring-study/blob/main/docs/04%20DataBase%EC%9E%90%EB%A3%8C%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0%20(Model%20%EC%83%9D%EC%84%B1%EA%B3%BC%20DB%EC%97%B0%EA%B2%B0).md)
 - [5. RESTful API](https://github.com/ttaengz/spring-study/blob/main/docs/05%20RESTful%20API.md)
 - [6. 데이터 검증 (Spring Validation)](https://github.com/ttaengz/spring-study/blob/main/docs/06%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B2%80%EC%A6%9D%20(Spring%20Validation).md)
+- [7. 인증 (Spring Security)](https://github.com/ttaengz/spring-study/blob/main/docs/07%20%EC%9D%B8%EC%A6%9D%20(Spring%20Security).md)
