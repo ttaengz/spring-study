@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myspring.comment.dao.UserDAO">
+
+    <insert id="insertUser" parameterType="com.myspring.comment.model.UserModel">
+        INSERT INTO tb_user (user_id, user_name, password, email, join_datetime)
+        VALUES(#{userId}, #{userName}, #{password}, #{email}, now());
+    </insert>
+
+    <select id="selectUser" resultType="com.myspring.comment.model.UserModel">
+        SELECT * FROM tb_user WHERE user_id = #{userId};
+    </select>
+
+</mapper>

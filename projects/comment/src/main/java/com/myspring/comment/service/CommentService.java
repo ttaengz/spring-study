@@ -2,11 +2,14 @@ package com.myspring.comment.service;
 
 import com.myspring.comment.dao.CommentDAO;
 import com.myspring.comment.model.CommentModel;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+@Validated
 @Service
 public class CommentService {
 
@@ -30,7 +33,7 @@ public class CommentService {
     /*
         등록 (Create)
      */
-    public int createComment(CommentModel commentModel) {
+    public int createComment(@Valid CommentModel commentModel) {
         commentDAO.insertComment(commentModel);
         return commentModel.getNo(); // 신규 생성된 글 번호 리턴
     }

@@ -17,5 +17,4 @@ public interface CommentDAO {
     int updateComment(@Param("no") int no, @Param("comment") String comment);
 
     int deleteComment(@Param("no") int no);
-
 }

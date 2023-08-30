@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple 댓글 서비스</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: "Noto Sans KR", sans-serif; }
     </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 <div class="my-5 mx-5">
     <h1 class="mb-5">댓글 등록</h1>
-    <form method="post" action="/comment">
+    <form method="post" action="/comments">
         <div class="input-group mb-3">
-            <input type="text" name="author" class="form-control me-1" placeholder="작성자명" style="max-width: 200px;" required>
-            <input type="text" name="comment" class="form-control" placeholder="댓글 내용을 입력해주세요." required>
+            <input type="text" name="author" class="form-control me-1" placeholder="작성자명" style="max-width: 200px;">
+            <input type="text" name="comment" class="form-control" placeholder="댓글 내용을 입력해주세요.">
             <button class="btn btn-outline-secondary" type="submit">등록</button>
         </div>
     </form>
@@ -31,22 +32,27 @@
             <th scope="col" style="min-width: 100px;">작성자</th>
             <th scope="col" style="min-width: 500px;">내용</th>
             <th scope="col" style="max-width: 160px;">일시</th>
+            <th scope="col" style="max-width: 50px;">수정</th>
             <th scope="col" style="max-width: 50px;">삭제</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cmt: ${commentList}">
-            <td th:text="${cmt.no}">no</td>
-            <td th:text="${cmt.author}">author</td>
-            <td th:text="${cmt.comment}">comment</td>
-            <td th:text="${#temporals.format(cmt.date, 'yyyy-MM-dd HH:mm')}">date</td>
+        <tr th:each="comment: ${commentList}">
+            <td th:text="${comment.no}">no</td>
+            <td th:text="${comment.author}">author</td>
+            <td th:text="${comment.comment}">comment</td>
+            <td th:text="${#temporals.format(comment.date, 'yyyy-MM-dd HH:mm')}">date</td>
             <td>
-                <button type="button" class="btn btn-outline-dark btn-sm" th:onclick="deleteComment([[${cmt.no}]])">삭제</button>
+                <a type="button" th:href="@{/comments/{no}(no=${comment.no})}" class="btn btn-outline-primary btn-sm">수정</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-outline-danger btn-sm" th:onclick="deleteComment([[${comment.no}]])">삭제</button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
 <script>
     function deleteComment(no) {
         if (confirm('삭제하시겠습니까?')) {
