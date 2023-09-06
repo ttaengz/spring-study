@@ -497,6 +497,15 @@
         <span class="badge bg-secondary ms-1">회원</span>
     </span>
     ```
+
+    > [참고] 시큐리티 템플릿 사용 예시
+    >```html
+    ><a href="users/login" sec:authorize="isAnonymous()">로그인</a>
+    ><a href="users/join" .sec:authorize="isAnonymous()">회원가입</a>
+    ><a href="users/logout" sec:authorize="isAuthenticated()">로그아웃</a>
+    ><a href="/posts" sec:authorize = "hasRole('ROLE_USER')">커뮤니티</a>
+    ><a href="/admin" sec:authorize = "hasRole('ROLE_ADMIN')">회원관리</a>
+    >```
  - 부가적인 사용자 정보 보여주기
    - 로그인 시 사용자 이름(userId)은 Conrtoller에서 Principal객체로 받아올 수 있다.
    - 로그인 id로 사용자 정보를 DB에서 select한 후 view로 전달한다.
@@ -523,6 +532,4 @@
         환영합니다.
     </span>
     ```
-  - 그러나 매번 사용자의 정보를 Controller에서 일일이 설정하는 것은 번거로우므로 개선 방법을 고민해보자.
-
-계속...
+  - 그러나 매번 사용자의 정보를 Controller에서 조회하여 설정하는 것은 효율적이지 않아 보인다. 개선 방법을 고민해보자. (2부에 계속)
