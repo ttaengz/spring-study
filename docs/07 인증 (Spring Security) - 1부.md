@@ -507,29 +507,9 @@
     ><a href="/admin" sec:authorize = "hasRole('ROLE_ADMIN')">회원관리</a>
     >```
  - 부가적인 사용자 정보 보여주기
-   - 로그인 시 사용자 이름(userId)은 Conrtoller에서 Principal객체로 받아올 수 있다.
-   - 로그인 id로 사용자 정보를 DB에서 select한 후 view로 전달한다.
-  
-    ```java
-    @GetMapping("/comments")
-        public String getAllCommentList(Principal principal, Model model) {
-
-        if (principal != null) {
-            model.addAttribute("user", userService.getUser(principal.getName()));
-        }
-
-        List<CommentModel> commentList = commentService.getAllCommentList();
-
-        model.addAttribute("commentList", commentList);
-        return "main";
-    }
-
-    ```
-
     ```html
-    <span sec:authorize="isAuthenticated()" class="navbar-text">
-        <span th:if="${user}" th:text="${user.userName}"></span>
-        환영합니다.
+    <span sec:authorize="isAuthenticated()" class="navbar-text" style="margin-right: 20px;">
+        <span class="navbar-text" sec:authentication="principal.name"></span>(<span sec:authentication="name"></span>)
+        님 환영합니다.
     </span>
     ```
-  - 그러나 매번 사용자의 정보를 Controller에서 조회하여 설정하는 것은 효율적이지 않아 보인다. 개선 방법을 고민해보자. (2부에 계속)
