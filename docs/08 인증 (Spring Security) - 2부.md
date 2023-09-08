@@ -100,10 +100,10 @@ authentication|인증된 사용자의 인증 정보**(Authentication** 구현한
  - Principal의 username필드에 id를 설정하였으므로 `principal.getUsername();`으로 유저 아이디를 알아올 수 있다.
 
     ```java
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
-    UserDetails userDetails = (UserDetails)principal; 
-    String username = principal.getUsername(); 
-    String password = principal.getPassword();
+   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+   if(!StringUtils.equals("anonymousUser", principal)) {
+       System.out.println(((UserDetails) principal).getUsername());
+   }
     ```
 
 ### Controller에서 파라미터로 Principal객체를 주입받기
