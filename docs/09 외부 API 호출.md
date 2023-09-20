@@ -334,6 +334,7 @@ public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
 
  - 댓글 또는 게시글에 유튜브 링크를 첨부하면 자동으로 동영상 정보를 불러와 게시글이 저장되도록 수정해보자.
  - 동영상 제목, 채널명, 플레이어 정보 표시
+ - 아래의 힌트들을 적절히 활용
 
 
 유튜브 동영상 주소의 형식은 다음과 같다
@@ -344,6 +345,43 @@ https://youtu.be/RTVI8JYf9hU?feature=shared
 ```
 
 >`RTVI8JYf9hU` 이 부분이 videoId에 해당한다.
+
+다음은 유튜브 링크 및 videoId를 추출하는 예시이다.
+```java
+@Test
+public void getYoutubeLinkTest() {
+    String text = "글 본문 중에 유튜브 링크를 추출한다.\n" +
+            "https://www.youtube.com/watch?v=RTVI8JYf9hU\n" +
+            "https://youtu.be/RTVI8JYf9hU\n";
+
+    System.out.println("Link: " + getYoutubeLink(text)); // 링크를 추출해온다.
+    System.out.println("Id: " + getYouTubeId(getYoutubeLink(text))); // 비디오 id를 추출한다.
+}
+
+// 본문에서 유튜브 링크를 찾아 리턴
+private  String getYoutubeLink(String text) {
+    Pattern compiledPattern = Pattern.compile("http(?:s?):\\/\\/(?:www\\.)?youtu(?:be\\.com\\/watch\\?v=|\\.be\\/)([\\w\\-\\_]*)(&(amp;)[\\w\\=]*)?");
+    Matcher matcher = compiledPattern.matcher(text);
+
+    if(matcher.find()){
+        return matcher.group();
+    }
+
+    return "";
+}
+
+// 유튜브 링크에서 비디오 id를 리턴
+private String getYouTubeId(String youtubeUrl) {
+    Pattern compiledPattern = Pattern.compile("(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*");
+    Matcher matcher = compiledPattern.matcher(youtubeUrl);
+
+    if(matcher.find()){
+        return matcher.group();
+    }
+
+    return "";
+}
+```
 
 동영상의 퍼가기(iframe) 시 HTML 소스코드는 다음과 같이 생성된다.
 iframe이 동작하려면 Spring Security의 설정을 수정해야 할  수도 있다.
