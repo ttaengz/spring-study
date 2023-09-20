@@ -10,3 +10,4 @@
 - [6. 데이터 검증 (Spring Validation)](https://github.com/ttaengz/spring-study/blob/main/docs/06%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B2%80%EC%A6%9D%20(Spring%20Validation).md)
 - [7. 인증 (Spring Security) 1부](https://github.com/ttaengz/spring-study/blob/main/docs/07%20%EC%9D%B8%EC%A6%9D%20(Spring%20Security)%20-%201%eb%b6%80.md)
 - [8. 인증 (Spring Security) 2부](https://github.com/ttaengz/spring-study/blob/main/docs/08%20%EC%9D%B8%EC%A6%9D%20(Spring%20Security)%20-%202%EB%B6%80.md)
+- [9. 외부 REST API 호출](https://github.com/ttaengz/spring-study/blob/main/docs/09%20%EC%99%B8%EB%B6%80%20API%20%ED%98%B8%EC%B6%9C.md)
