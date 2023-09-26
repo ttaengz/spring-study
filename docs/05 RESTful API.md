@@ -65,7 +65,7 @@
  
 5. 행위를 포함하지 않는다.
  - Bad Example `http://example.com/delete-post/1`
- - Good Example  `http://example.com/post/1`
+ - Good Example  `http://example.com/posts/1`
 
 <br>
 
