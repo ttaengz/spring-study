@@ -11,3 +11,4 @@
 - [7. 인증 (Spring Security) 1부](https://github.com/ttaengz/spring-study/blob/main/docs/07%20%EC%9D%B8%EC%A6%9D%20(Spring%20Security)%20-%201%eb%b6%80.md)
 - [8. 인증 (Spring Security) 2부](https://github.com/ttaengz/spring-study/blob/main/docs/08%20%EC%9D%B8%EC%A6%9D%20(Spring%20Security)%20-%202%EB%B6%80.md)
 - [9. 외부 REST API 호출](https://github.com/ttaengz/spring-study/blob/main/docs/09%20%EC%99%B8%EB%B6%80%20API%20%ED%98%B8%EC%B6%9C.md)
+- [10. 프로젝트 빌드 및 배포](https://github.com/ttaengz/spring-study/blob/main/docs/10%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EB%B9%8C%EB%93%9C%20%EB%B0%8F%20%EB%B0%B0%ED%8F%AC.md)
